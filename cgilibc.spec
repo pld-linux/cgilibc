@@ -4,7 +4,7 @@ Summary:	Common Gateway Interface library
 Summary(pl):	Biblioteka CGI (Common Gateway Interface)
 Name:		cgilibc
 Version:	0.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ibiblio.org/pub/Linux/libs/%{realname}-%{version}.tar.gz
@@ -31,7 +31,7 @@ http://cgilib.sourceforge.net/).
 Summary:	cgilib header files
 Summary(pl):	Pliki nag³ówkowe cgilib
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 cgilib header files.
@@ -43,7 +43,7 @@ Pliki nag³ówkowe cgilib.
 Summary:	Static version of cgilib
 Summary(pl):	Statyczna wersja cgilib
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of cgilib.
@@ -59,13 +59,15 @@ Statyczna wersja cgilib.
 %build
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -Wall -I."
+	CFLAGS="%{rpmcflags} -Wall -I." \
+	LIBDIR=%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	LIBDIR=%{_libdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
