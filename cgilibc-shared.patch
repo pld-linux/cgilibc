@@ -1,0 +1,57 @@
+diff -Nur cgilib-0.5.orig/Makefile cgilib-0.5/Makefile
+--- cgilib-0.5.orig/Makefile	1999-08-20 23:14:07.000000000 +0200
++++ cgilib-0.5/Makefile	2003-04-20 10:25:24.000000000 +0200
+@@ -15,24 +15,35 @@
+ #   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111, USA.
+ 
+ CFLAGS = -I. -Wall -O2 -g
+-LDFLAGS = -L.
+-LIBS = -lcgi
+-
+-OBJS = cgi.o cookies.o
+-
+-libcgi.a: $(OBJS)
+-	ar rc $@ $^
+-
+-cgitest: cgitest.o libcgi.a
+-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+-
+-jumpto: jumpto.o libcgi.a
+-	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+-
+-all: libcgi.a cgitest jumpto
+-
+-install: cgitest
+-	install -m 755 cgitest /usr/lib/cgi-bin
++# used to be libcgi, but conflicted with cgilib++
++LIBS = libcgic.la
++LIBDIR = /usr/lib
++INCLUDEDIR = /usr/include/cgilibc
++MANDIR = /usr/share/man
++
++OBJS = cgi.lo cookies.lo
++HEADERS = cgi.h
++
++all: $(LIBS) cgitest jumpto
++
++libcgic.la: $(OBJS)
++	libtool --mode=link $(CC) -o libcgic.la $(OBJS) -rpath $(LIBDIR)
++
++cgitest: cgitest.o $(LIBS)
++	libtool --mode=link $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
++
++jumpto: jumpto.o $(LIBS)
++	libtool --mode=link $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
++
++%.lo: %.c
++	libtool --mode=compile $(CC) $(CFLAGS) -o $@ -c $<
++
++install: libcgic.la
++	install -d $(DESTDIR)$(LIBDIR) $(DESTDIR)$(INCLUDEDIR) $(DESTDIR)$(MANDIR)/man{3,5}
++	libtool --mode=install install libcgic.la $(DESTDIR)$(LIBDIR)
++	install $(HEADERS) $(DESTDIR)$(INCLUDEDIR)
++	install *.3 $(DESTDIR)$(MANDIR)/man3
++	install *.5 $(DESTDIR)$(MANDIR)/man5
+ 
+ clean:
+ 	rm -f cgitest cgitest.o jumpto jumpto.o libcgi.a $(OBJS) *.[35].html
