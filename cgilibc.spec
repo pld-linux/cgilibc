@@ -8,6 +8,7 @@ Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ibiblio.org/pub/Linux/libs/%{realname}-%{version}.tar.gz
+# Source0-md5:	5187ba11b2ec165b6c5b6629087733b0
 Patch0:		%{name}-shared.patch
 Patch1:		%{name}-fix.patch
 BuildRequires:	libtool
