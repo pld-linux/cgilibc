@@ -1,7 +1,7 @@
 # the true package name is "cgilib", but it was already taken by other library
 %define	realname	cgilib
 Summary:	Common Gateway Interface library
-Summary(pl):	Biblioteka CGI (Common Gateway Interface)
+Summary(pl.UTF-8):   Biblioteka CGI (Common Gateway Interface)
 Name:		cgilibc
 Version:	0.5
 Release:	2
@@ -20,35 +20,35 @@ Original project name was "cgilib", but we must have renamed it
 because of name conflict with existing cgilib package (completely
 different CGI library in C++ from http://cgilib.sourceforge.net/).
 
-%description -l pl
+%description -l pl.UTF-8
 Biblioteka CGI (Common Gateway Interface) napisana w czystym C przez
 Martina Schultze. Oryginalna nazwa projektu to "cgilib", ale
-musieli¶my j± zmieniæ z powodu konfliktu z ju¿ istniej±cym pakietem
-cgilib (ca³kowicie inn± bibliotek± CGI w C++ z
+musieliÅ›my jÄ… zmieniÄ‡ z powodu konfliktu z juÅ¼ istniejÄ…cym pakietem
+cgilib (caÅ‚kowicie innÄ… bibliotekÄ… CGI w C++ z
 http://cgilib.sourceforge.net/).
 
 %package devel
 Summary:	cgilib header files
-Summary(pl):	Pliki nag³ówkowe cgilib
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe cgilib
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 cgilib header files.
 
-%description devel -l pl
-Pliki nag³ówkowe cgilib.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe cgilib.
 
 %package static
 Summary:	Static version of cgilib
-Summary(pl):	Statyczna wersja cgilib
+Summary(pl.UTF-8):   Statyczna wersja cgilib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of cgilib.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja cgilib.
 
 %prep
