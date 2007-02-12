@@ -1,7 +1,7 @@
 # the true package name is "cgilib", but it was already taken by other library
 %define	realname	cgilib
 Summary:	Common Gateway Interface library
-Summary(pl.UTF-8):   Biblioteka CGI (Common Gateway Interface)
+Summary(pl.UTF-8):	Biblioteka CGI (Common Gateway Interface)
 Name:		cgilibc
 Version:	0.5
 Release:	2
@@ -29,7 +29,7 @@ http://cgilib.sourceforge.net/).
 
 %package devel
 Summary:	cgilib header files
-Summary(pl.UTF-8):   Pliki nagłówkowe cgilib
+Summary(pl.UTF-8):	Pliki nagłówkowe cgilib
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -41,7 +41,7 @@ Pliki nagłówkowe cgilib.
 
 %package static
 Summary:	Static version of cgilib
-Summary(pl.UTF-8):   Statyczna wersja cgilib
+Summary(pl.UTF-8):	Statyczna wersja cgilib
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
