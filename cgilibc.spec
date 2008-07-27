@@ -4,7 +4,7 @@ Summary:	Common Gateway Interface library
 Summary(pl.UTF-8):	Biblioteka CGI (Common Gateway Interface)
 Name:		cgilibc
 Version:	0.5
-Release:	2
+Release:	3
 License:	GPL
 Group:		Libraries
 Source0:	ftp://ibiblio.org/pub/Linux/libs/%{realname}-%{version}.tar.gz
