@@ -1,0 +1,29 @@
+--- cgilib-0.7/Makefile.am.orig	2009-02-07 14:31:43.000000000 +0100
++++ cgilib-0.7/Makefile.am	2010-11-14 06:51:59.223097423 +0100
+@@ -15,19 +15,20 @@
+ #   along with this program; if not, write to the Free Software Foundation
+ #   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ 
+-lib_LTLIBRARIES = libcgi.la
++lib_LTLIBRARIES = libcgic.la
+ 
+-libcgi_la_SOURCES = cgi.c cookies.c aux.c
+-libcgi_la_LDFLAGS = -version-info @SO_VERSION@
++libcgic_la_SOURCES = cgi.c cookies.c aux.c
++libcgic_la_LDFLAGS = -version-info @SO_VERSION@
+ 
+ bin_PROGRAMS = cgitest jumpto
+ 
+ cgitest_SOURCES = cgitest.c
+-cgitest_LDADD = libcgi.la
++cgitest_LDADD = libcgic.la
+ 
+ jumpto_SOURCES = cgitest.c
+-jumpto_LDADD = libcgi.la
++jumpto_LDADD = libcgic.la
+ 
+-include_HEADERS = aux.h cgi.h
++cgiincludedir = $(includedir)/cgilibc
++cgiinclude_HEADERS = aux.h cgi.h
+ 
+ man_MANS =  cgi.5 cgiDebug.3 cgiEscape.3 cgiFree.3 cgiFreeList.3 cgiGetCookie.3 cgiGetCookies.3 cgiGetFile.3 cgiGetFiles.3 cgiGetValue.3 cgiGetVariables.3 cgiHeader.3 cgiInit.3 cgiRedirect.3 cgiSetHeader.3 cgiSetType.3

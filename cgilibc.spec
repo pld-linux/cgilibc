@@ -3,14 +3,16 @@
 Summary:	Common Gateway Interface library
 Summary(pl.UTF-8):	Biblioteka CGI (Common Gateway Interface)
 Name:		cgilibc
-Version:	0.5
-Release:	3
-License:	GPL
+Version:	0.7
+Release:	1
+License:	GPL v2+
 Group:		Libraries
-Source0:	ftp://ibiblio.org/pub/Linux/libs/%{realname}-%{version}.tar.gz
-# Source0-md5:	5187ba11b2ec165b6c5b6629087733b0
-Patch0:		%{name}-shared.patch
-Patch1:		%{name}-fix.patch
+Source0:	http://www.infodrom.org/projects/cgilib/download/%{realname}-%{version}.tar.gz
+# Source0-md5:	2c7053f58dfb06f7a80a112797ed7e86
+Patch0:		%{name}-suffix.patch
+URL:		http://www.infodrom.org/projects/cgilib/
+BuildRequires:	autoconf >= 2.50
+BuildRequires:	automake
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,20 +56,25 @@ Statyczna wersja cgilib.
 %prep
 %setup -q -n %{realname}-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
-%{__make} \
-	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -Wall -I." \
-	LIBDIR=%{_libdir}
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+%configure
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT \
-	LIBDIR=%{_libdir}
+	DESTDIR=$RPM_BUILD_ROOT
+
+# examples - include as source, not binaries
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/{cgitest,jumpto}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -p cgitest.c jumpto.c $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,16 +84,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGES CREDITS cookies.txt readme
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%doc AUTHORS ChangeLog README cookies.txt
+%attr(755,root,root) %{_libdir}/libcgic.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcgic.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libcgic.so
+%{_libdir}/libcgic.la
 %{_includedir}/cgilibc
-%{_mandir}/man[35]/*
+%{_mandir}/man3/cgi*.3*
+%{_mandir}/man5/cgi.5*
+%{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libcgic.a
