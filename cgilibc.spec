@@ -55,7 +55,7 @@ Statyczna wersja cgilib.
 
 %prep
 %setup -q -n %{realname}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{__libtoolize}
